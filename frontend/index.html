@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeReview Hub</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Highlight.js Theme -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <!-- Highlight.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <!-- Vue 3 -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        <app-header></app-header>
+        <toast-notification></toast-notification>
+        <auth-forms v-if="showAuthModal"></auth-forms>
+        
+        <main class="container main-content">
+            <component :is="currentComponent"></component>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/services/api.js"></script>
+    <script src="js/components/ToastNotification.js"></script>
+    <script src="js/components/AppHeader.js"></script>
+    <script src="js/components/AuthForms.js"></script>
+    <script src="js/components/SnippetList.js"></script>
+    <script src="js/components/SnippetForm.js"></script>
+    <script src="js/components/InlineComments.js"></script>
+    <script src="js/components/CodeViewer.js"></script>
+    <script src="js/components/ReviewPanel.js"></script>
+    <script src="js/components/SnippetDetail.js"></script>
+    <script src="js/components/Dashboard.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
