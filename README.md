@@ -149,8 +149,4 @@ Tests:    15 passed (29 assertions)
 
 ---
 
-## 👤 Autor
 
-Desenvolvido por **João Lucca Sotero**.
-- LinkedIn: [João Lucca](https://www.linkedin.com/in/jo%C3%A3o-lucca-sotero-b899a5369/)
-- GitHub: [@lucca3447](https://github.com/lucca3447)
