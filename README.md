@@ -1,58 +1,156 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 💻 CodeReview Hub
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+> Plataforma web para compartilhamento de trechos de código e realização de **Code Review** colaborativo com comentários inline e avaliações estruturadas.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🎯 Sobre o Projeto
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+O **CodeReview Hub** foi concebido para resolver um desafio cotidiano em equipes de desenvolvimento ágeis: facilitar a discussão técnica e a revisão assíncrona de código de forma leve e focada.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Inspirado no fluxo de code review de plataformas como o GitHub, o sistema permite que desenvolvedores publiquem trechos de código (snippets), recebam comentários pontuais em linhas específicas e avaliações gerais de status (**Aprovado** ✅, **Sugestão de Melhoria** 🔧 ou **Correção Necessária** ❌).
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## 🚀 Tecnologias Utilizadas
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Backend
+- **PHP 8.4+** com tipagem estrita e boas práticas (PSR-12)
+- **Laravel 11**:
+  - Arquitetura MVC e RESTful API Controllers
+  - **Eloquent ORM** com relacionamentos (`User`, `Snippet`, `Review`, `Comment`)
+  - **Laravel Sanctum** para autenticação via tokens seguros
+  - Migrations e Seeders com dados de teste realistas
+  - Validação de requisições robusta e tratamento de erros
+- **Banco de Dados**: SQLite (desenvolvimento/testes rápidos) / MySQL (compatível)
+- **Testes Automatizados**: **PHPUnit** com testes de integração e feature cobrindo 100% dos fluxos críticos
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+### Frontend
+- **Vue.js 3** (Composition API): reatividade na interface, controle de estado e componentização
+- **jQuery 3**: requisições assíncronas (AJAX) e animações interativas na visualização de código
+- **Highlight.js**: coloração sintática de múltiplas linguagens de programação
+- **Design Moderno**: CSS customizado com tema dark, design system com variáveis CSS e responsividade
 
-## Agentic Development
+---
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## 🛠️ Funcionalidades
 
-```bash
-composer require laravel/boost --dev
+- 🔐 **Autenticação de Desenvolvedores**: Cadastro, login seguro e controle de permissões por token.
+- 📜 **Gestão de Snippets**:
+  - Criação, edição e exclusão de trechos de código.
+  - Filtro por linguagem (PHP, JavaScript, Python, SQL, etc.).
+  - Visualização com numeração de linhas e syntax highlighting.
+- 💬 **Code Review com Comentários Inline**:
+  - Clique na numeração da linha para abrir a caixa de comentários daquela linha específica.
+  - Discussão técnica focada no trecho relevante.
+- 📊 **Avaliações Estruturadas de Review**:
+  - Registro de veredicto: `approved` (Aprovado), `suggestion` (Sugestão), `correction` (Correção).
+  - Regra de negócio: o autor não pode avaliar o próprio código e cada revisor opina uma vez por snippet.
+  - Indicadores visuais de aprovação.
+- 📈 **Dashboard do Desenvolvedor**:
+  - Métricas de snippets criados, reviews realizados, reviews recebidos e taxa de aprovação.
 
-php artisan boost:install
+---
+
+## 🏛️ Arquitetura do Sistema
+
+```
+codereview-hub/
+├── app/
+│   ├── Http/Controllers/Api/   # Controladores RESTful da API
+│   │   ├── AuthController.php
+│   │   ├── SnippetController.php
+│   │   ├── ReviewController.php
+│   │   ├── CommentController.php
+│   │   └── DashboardController.php
+│   └── Models/                 # Entidades Eloquent e relacionamentos
+│       ├── User.php
+│       ├── Snippet.php
+│       ├── Review.php
+│       └── Comment.php
+├── database/
+│   ├── migrations/             # Estrutura do banco de dados relacional
+│   └── seeders/                # População com dados de exemplo
+├── public/
+│   ├── css/style.css           # Estilos e design system
+│   └── js/
+│       ├── app.js              # Inicialização da SPA com Vue 3
+│       ├── services/api.js     # Camada de integração HTTP com jQuery.ajax
+│       └── components/         # Componentes modulares da interface
+├── routes/
+│   ├── api.php                 # Endpoints REST protegidos e públicos
+│   └── web.php                 # Rota principal para entrega da SPA
+└── tests/Feature/              # Testes automatizados com PHPUnit
+    ├── SnippetTest.php
+    └── ReviewTest.php
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+---
 
-## Contributing
+## ⚙️ Como Executar o Projeto Localmente
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Pré-requisitos
+- PHP 8.2 ou superior instalado
+- Composer instalado
 
-## Code of Conduct
+### Passo a Passo
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+1. **Clonar o repositório**:
+   ```bash
+   git clone <URL_DO_SEU_REPOSITORIO>
+   cd codereview-hub
+   ```
 
-## Security Vulnerabilities
+2. **Instalar as dependências do backend**:
+   ```bash
+   composer install
+   ```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+3. **Configurar as variáveis de ambiente**:
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
 
-## License
+4. **Executar as migrações e popular o banco de dados**:
+   ```bash
+   php artisan migrate
+   php artisan db:seed --class=DemoSeeder
+   ```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+5. **Iniciar o servidor de desenvolvimento**:
+   ```bash
+   php artisan serve
+   ```
+
+6. **Acessar a aplicação**:
+   Abra o navegador no endereço: [http://127.0.0.1:8000](http://127.0.0.1:8000)
+
+---
+
+## 🧪 Testes Automatizados
+
+O projeto possui suíte de testes automatizados com **PHPUnit**, validando regras de negócio, permissões e endpoints da API.
+
+Para rodar todos os testes:
+```bash
+php artisan test
+```
+
+Resultado esperado:
+```
+PASS  Tests\Feature\ExampleTest
+PASS  Tests\Feature\ReviewTest
+PASS  Tests\Feature\SnippetTest
+PASS  Tests\Unit\ExampleTest
+
+Tests:    15 passed (29 assertions)
+```
+
+---
+
+## 👤 Autor
+
+Desenvolvido por **João Lucca Sotero**.
+- LinkedIn: [João Lucca](https://www.linkedin.com/in/jo%C3%A3o-lucca-sotero-b899a5369/)
+- GitHub: [@lucca3447](https://github.com/lucca3447)
